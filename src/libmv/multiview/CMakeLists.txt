@@ -3,14 +3,24 @@ SET(MULTIVIEW_SRC projection.cc
                   fundamental.cc
                   triangulation.cc
                   euclidean_resection.cc
-                  conditioning.cc)
+                  conditioning.cc
+                  robust_fundamental.cc
+                  fundamental_kernel.cc
+                  homography.cc
+                  robust_homography.cc
+                  homography_kernel.cc
+                  structure.cc
+                  robust_resection.cc
+                  robust_euclidean_resection.cc
+                  autocalibration.cc
+                  bundle.cc)
 
 # define the header files (make the headers appear in IDEs.)
 FILE(GLOB MULTIVIEW_HDRS *.h)
 
 ADD_LIBRARY(multiview ${MULTIVIEW_SRC} ${MULTIVIEW_HDRS})
 
-TARGET_LINK_LIBRARIES(multiview glog numeric )
+TARGET_LINK_LIBRARIES(multiview glog numeric V3D)
 
 # make the name of debug libraries end in _d.
 SET_TARGET_PROPERTIES(multiview PROPERTIES DEBUG_POSTFIX "_d")

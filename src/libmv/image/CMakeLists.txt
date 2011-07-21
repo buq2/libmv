@@ -10,13 +10,15 @@ IF(WIN32)
 ENDIF(WIN32)
 
 # define the source files
-SET(IMAGE_SRC image.cc convolve.cc array_nd.cc)
+SET(IMAGE_SRC image.cc convolve.cc array_nd.cc image_io.cc image_sequence_io.cc image_sequence.cc)
 
 # define the header files (make the headers appear in IDEs.)
 FILE(GLOB IMAGE_HDRS *.h)
 
 ADD_LIBRARY(image ${IMAGE_SRC} ${IMAGE_HDRS})
-
+TARGET_LINK_LIBRARIES(image
+                    jpeg
+                    png)
 
 # make the name of debug libraries end in _d.
 SET_TARGET_PROPERTIES(image PROPERTIES DEBUG_POSTFIX "_d")
