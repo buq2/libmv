@@ -69,5 +69,8 @@ bool FLANN_Wrapper(const FLANN_Data & testSet,const FLANN_Data & dataSet,
                   vector<int> * resultIndices, vector<float> * resultDistances,
                   int NumberOfNeighbours);
 
+bool FLANN_Wrapper_KDTREE(const FLANN_Data & testSet,const FLANN_Data & dataSet,
+                  vector<int> * resultIndices, vector<float> * resultDistances,
+                  int NumberOfNeighbours);
 
 #endif //LIBMV_CORRESPONDENCE_FEATURE_MATCHING_FLANN_H_
