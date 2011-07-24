@@ -17,4 +17,4 @@ Local modifications:
 * make convolution code better : convolution.h use template<class T> inline void convolve_sym
 * fix layer issue un daisy.cpp (memory error in valgrind)
 * Make it compile on platforms without large file support (mmap64, open64 and friends).
-
+* Added 720p to list of unrolled image sizes.

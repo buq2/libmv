@@ -43,7 +43,9 @@ class DaisyDescriber : public Describer {
     // them via some sort of config system.
 
     // Defaults from README.
-    desc.set_parameters(15, 3, 8, 8);
+    int radius = 15;
+    desc.set_parameters(radius, 3, 8, 8);
+    desc.verbose(0); //No daisy output
     //desc.scale_invariant(true);
 
     // Push the image into daisy. This will make a copy and convert to float.
@@ -60,11 +62,16 @@ class DaisyDescriber : public Describer {
       PointFeature *point = dynamic_cast<PointFeature *>(features[i]);
       VecfDescriptor *descriptor = NULL;
       if (point) {
-        descriptor = new VecfDescriptor(desc.descriptor_size());
-        desc.get_descriptor(point->y(),
-                            point->x(),
-                            point->orientation * 180.0 / 3.14159f,
-                            descriptor->coords.data());
+        //Make sure that point is not too close to boarders
+        float x = point->x();
+        float y = point->y();
+        if (x > radius && x < byte_image->Width() - (radius+1) && y > radius && y < byte_image->Height() - (radius+1)) {
+          descriptor = new VecfDescriptor(desc.descriptor_size());
+          desc.get_descriptor(point->y(),
+                              point->x(),
+                              point->orientation * 180.0 / 3.14159f,
+                              descriptor->coords.data());
+        }
       }
       (*descriptors)[i] = descriptor;
     }
